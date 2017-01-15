@@ -4,7 +4,11 @@
     <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>#media argument are hashes .when
+                                                                                                #hashes are the last argument in functional call,
+                                                                                                #the curly bracket are optional
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
