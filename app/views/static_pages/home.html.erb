@@ -1,12 +1,24 @@
 <% provide(:title, "Home") %>
 
+
 <html>
     <head>
       <title><%= yield(:title) %> |ruby is my love</title>
     </head>
  <body>
-<h1>StaticPages#home</h1>
-<p>hello people i am from home render from view</p>
-<a href="#">HOME</a>
+ <div class="center jumbotron">
+   <h1>Welcome to sample app</h1>
+   <h2>
+     This is home page for Home
+     <a href="#">Ruby</a>
+   </h2>
+   <%= link_to 'Sign up now', 'signup_path',class:"btn btn-lg btn-primary" %>
+
+ </div>
+ <%= link_to image_tag('railslogo.png', alt:'rails logo',height:'100') %> <!--Because we used the image_tag helper  , Rails will
+                                                                             automatically
+                                                                           find any images in the app/assets/images/ directory
+                                                                           using the asset pipeline  -->
+
 </body>
 </html>

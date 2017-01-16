@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html>  <!-- #HTML5 -->
 <html>
   <head>
     <title><%= full_title(yield(:title)) %></title>
@@ -6,13 +6,23 @@
 
 
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>#media argument are hashes .when
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %><!--#media argument are hashes .when
                                                                                                 #hashes are the last argument in functional call,
-                                                                                                #the curly bracket are optional
+                                                                                                #the curly bracket are optional-->
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= render 'layouts/shim' %>
+
   </head>
 
   <body>
+  <%= render 'layouts/header' %>   <!--The way to achieve this in Rails is to use a facility called partials -->
+
+  <div class="container">
     <%= yield %>
+    <%= render 'layouts/footer'%>
+
+  </div>
+
   </body>
 </html>
+
