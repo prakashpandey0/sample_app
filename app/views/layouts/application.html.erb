@@ -18,9 +18,17 @@
   <%= render 'layouts/header' %>   <!--The way to achieve this in Rails is to use a facility called partials -->
 
   <div class="container">
+    <% flash.each do |message_type, message| %>
+            <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
+
     <%= yield %>
     <%= render 'layouts/footer'%>
-
+    <%= debug(params) if Rails.env.development? %>  <!-- #Adding some debug information to the site layout
+                                                    #Since we don’t want to display debug information to users
+                                                      of a deployed application,  uses if Rails.env.development?
+                                                        to restrict the debug information to the development environment,
+                                                        which is one of three environments defined by default in Rails-->
   </div>
 
   </body>
