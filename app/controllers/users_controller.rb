@@ -1,4 +1,11 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, only: [:index,:edit, :update]        #requiring loged-in user can only edit and update
+  before_action :correct_user,   only: [:edit, :update]
+
+  def index
+  @user = User.all
+  end
+
   def show
     @user  = User.find(params[:id])
     #debugger used for debug in console
@@ -9,7 +16,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)    # Not the final implementation!
+    @user = User.new(user_params)
     if @user.save                     #calling the user_params
       log_in @user  # Logging in the user upon signup.
       # Handle a successful save.
@@ -20,11 +27,45 @@ class UsersController < ApplicationController
     end
   end
 
+  #we deifne edit funtion for udating the user
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  #for upadate the user same as create except using udate_attributes
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      # Handle a successful update.
+      flash[:success] = "Profile updated"
+      redirect_to @user
+    else
+      render 'edit'
+    end
+  end
+
     private
     def user_params
       params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation)
     end
+
+  # Before filters
+
+  # Confirms a logged-in user.
+  def logged_in_user
+    unless logged_in?
+      store_location
+      flash[:danger] = "Please log in."
+      redirect_to login_url
+    end
+  end
+
+  # Confirms the correct user.
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless @user == current_user
+  end
 
 
 end

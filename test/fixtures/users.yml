@@ -1,0 +1,4 @@
+radhey:
+ name:radhey mishra
+ email: radhey@gamil.com
+ password_digest: <%= User.digest('password')%>
